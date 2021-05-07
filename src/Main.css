@@ -1,0 +1,15 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    margin-top: 15px;
+    width: 1200px;
+    height: 150px;
+    border-radius: 25px;
+    background: linear-gradient(225deg, #005143, #004439);
+    box-shadow:  -19px 19px 38px #004035,
+                19px -19px 38px #005849;
+}

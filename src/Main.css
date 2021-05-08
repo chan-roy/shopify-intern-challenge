@@ -1,15 +1,66 @@
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1.5fr 3fr 1fr;
+    grid-template-rows: 33.3vh 33.3vh 33.3vh;
+    grid-template-areas: ". results nominations " "title results nominations" ". results nominations";
 }
 
-.container {
-    margin-top: 15px;
-    width: 1200px;
-    height: 150px;
+@media only screen and (max-width: 1200px) {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .resultsGrid {
+        grid-template-rows: 1fr;
+        grid-template-columns: auto;
+    }
+}
+
+.title {
+    color: white;
+    padding: 10px;
+    grid-area: title;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    background-color: #faf9fa;
+    grid-area: results;
+}
+
+.resultsGrid {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow-y: scroll;
+}
+
+.movieDetail {
+    cursor: pointer;
+}
+
+.resultsGrid > div {
+    text-align: center;
+    margin: auto;
+}
+
+.nominations {
+    background-color: #fbf7ed;
+    grid-area: nominations;
+}
+
+.searchbar {
+    width: 100%;
+    height: 50px;
+    font-size: 24px;
     border-radius: 25px;
-    background: linear-gradient(225deg, #005143, #004439);
-    box-shadow:  -19px 19px 38px #004035,
-                19px -19px 38px #005849;
+    border: 0;
+    font-weight: bold;
+}
+
+.searchbar:focus {
+    outline: none;
+    border: 1px solid black;
 }

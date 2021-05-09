@@ -23,7 +23,7 @@ function Main() {
             setIsFetching(true)
             setSearchTerm(e.target.value)
             setResults([])
-            fetch(`https://www.omdbapi.com/?s=${e.target.value}&apikey=21c815d1&type=movie`, {method: 'get'}).then(
+            fetch(`https://www.omdbapi.com/?s=${e.target.value.trim()}&apikey=21c815d1&type=movie`, {method: 'get'}).then(
                 (response) => response.json()
                 ).then(body => setTimeout(() => {
                                 if (body.Error) {

@@ -93,7 +93,7 @@ function Main() {
                                 <span className='hoverText'>Nominate</span>
                                 <div className='movieDetail' onClick={() => saveNominations(result.Title)}>
                                     <img className='moviePoster' src={result.Poster} alt={result.Title}/>
-                                    <h3>{result.Title}</h3>
+                                    <h3>{result.Title} ({result.Year})</h3>
                                 </div>
                             </div>
                         </CSSTransition>)}

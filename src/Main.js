@@ -46,17 +46,12 @@ function Main() {
             window.alert('Five movies have already been nominated.')
         }
         else {
-            if (selected.indexOf(movie) === -1) {
-                let newSelected = selected.concat(movie)
-                if (newSelected.length === 5) {
-                    window.alert('You have nominated five movies!')
-                }
-                setSelected(newSelected)
-                window.localStorage.setItem('savedNoms', JSON.stringify(newSelected))
+            let newSelected = selected.concat(movie)
+            if (newSelected.length === 5) {
+                window.alert('You have nominated five movies!')
             }
-            else {
-                window.alert('Movie has already been nominated.')
-            }
+            setSelected(newSelected)
+            window.localStorage.setItem('savedNoms', JSON.stringify(newSelected))
         }
     }
 
@@ -89,9 +84,9 @@ function Main() {
                     <TransitionGroup component={null}>
                     {results.map((result, i) => 
                         <CSSTransition timeout={200} classNames='fadeIn'>
-                            <div className='galleryItem' key={i} style={{transitionDelay: `${i + 1}00ms`}}>
-                                <span className='hoverText'>Nominate</span>
-                                <div className='movieDetail' onClick={() => saveNominations(`${result.Title} (${result.Year})`)}>
+                            <div className={`galleryItem ${selected.includes(`${result.Title} (${result.Year})`) ? 'disabled' : ''}`} key={i} style={{transitionDelay: `${i + 1}00ms`}}>
+                                <span className='hoverText'>{selected.includes(`${result.Title} (${result.Year})`) ? 'Nominated' : 'Nominate'}</span>
+                                <div className='movieDetail' onMouseDown={() => saveNominations(`${result.Title} (${result.Year})`)}>
                                     <img className='moviePoster' src={result.Poster} alt={result.Title}/>
                                     <h3>{result.Title} ({result.Year})</h3>
                                 </div>
@@ -102,8 +97,9 @@ function Main() {
             </div>
             <div className='nominations'>
                 <h1>Your Nominations</h1>
+                {selected.length === 0 && <h2>Nominate a movie by selecting the poster.</h2>}
                 <div className='nominationList'>
-                    {selected.map((selection, index) => <div><span className='movieTitle'>{selection}</span><span className='delete' onClick={() => removeNomination(index)}>Remove</span></div>)}
+                    {selected.map((selection, index) => <div><span className='movieTitle'>{selection}</span><span className='delete' onMouseDown={() => removeNomination(index)}>Remove</span></div>)}
                 </div>
             </div>
         </main>

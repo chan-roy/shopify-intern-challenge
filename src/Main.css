@@ -35,6 +35,18 @@ main {
     transition: all 0.2s ease-out;
 }
 
+.galleryItem.disabled {
+    pointer-events: none;
+}
+
+.galleryItem.disabled .moviePoster {
+    filter: brightness(0.2);
+}
+
+.galleryItem.disabled > .hoverText {
+    display: block;
+}
+
 .movieDetail {
     cursor: pointer;
     z-index: 5;
@@ -42,6 +54,7 @@ main {
 
 .hoverText{
     display: none;
+    pointer-events: none;
     z-index: 10;
     color: white;
     text-shadow: 0 2px 2px black;

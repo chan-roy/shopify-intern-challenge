@@ -9,6 +9,11 @@ main {
     color: white;
     padding: 10px;
     grid-area: title;
+    border-radius: 25px;
+    background: linear-gradient(145deg, #004439, #005143);
+    box-shadow:  20px 20px 60px #004136,
+                -20px -20px 60px #005748;
+    margin: 10px 10px;
 }
 
 .results {
@@ -16,6 +21,9 @@ main {
     flex-direction: column;
     background-color: #faf9fa;
     justify-content: center;
+    border-radius: 25px;
+    margin: 10px;
+    box-shadow: 5px 5px 0 2px black;
     grid-area: results;
 }
 
@@ -67,6 +75,7 @@ main {
 }
 
 .moviePoster {
+    box-shadow: 2px 2px 2px 2px black;
     transition: all 0.2s ease-in;
 }
 
@@ -86,6 +95,10 @@ main {
 .nominations {
     background-color: #fbf7ed;
     grid-area: nominations;
+    border-radius: 25px;
+    padding: 5px;
+    margin: 10px;
+    box-shadow: 5px 5px 0 2px black;
 }
 
 .search {

@@ -91,7 +91,7 @@ function Main() {
                         <CSSTransition timeout={200} classNames='fadeIn'>
                             <div className='galleryItem' key={i} style={{transitionDelay: `${i + 1}00ms`}}>
                                 <span className='hoverText'>Nominate</span>
-                                <div className='movieDetail' onClick={() => saveNominations(result.Title)}>
+                                <div className='movieDetail' onClick={() => saveNominations(`${result.Title} (${result.Year})`)}>
                                     <img className='moviePoster' src={result.Poster} alt={result.Title}/>
                                     <h3>{result.Title} ({result.Year})</h3>
                                 </div>

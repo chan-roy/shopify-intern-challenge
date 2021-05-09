@@ -5,18 +5,6 @@ main {
     grid-template-areas: ". results nominations " "title results nominations" ". results nominations";
 }
 
-@media only screen and (max-width: 1200px) {
-    main {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .resultsGrid {
-        grid-template-rows: 1fr;
-        grid-template-columns: auto;
-    }
-}
-
 .title {
     color: white;
     padding: 10px;
@@ -27,7 +15,12 @@ main {
     display: flex;
     flex-direction: column;
     background-color: #faf9fa;
+    justify-content: center;
     grid-area: results;
+}
+
+.results > h1 {
+    text-align: center;
 }
 
 .resultsGrid {
@@ -39,16 +32,19 @@ main {
 
 .galleryItem {
     position: relative;
+    transition: all 0.2s ease-out;
 }
 
 .movieDetail {
-    transition: all 0.2s ease-out;
     cursor: pointer;
+    z-index: 5;
 }
 
-.hoverText {
+.hoverText{
     display: none;
+    z-index: 10;
     color: white;
+    text-shadow: 0 2px 2px black;
     font-size: 24px;
     font-weight: bolder;
     position: absolute;
@@ -57,11 +53,15 @@ main {
     margin: -60px -60px;
 }
 
-.movieDetail:hover {
-    filter: brightness(50%);
+.moviePoster {
+    transition: all 0.2s ease-in;
 }
 
-.hoverText + .movieDetail:hover{
+.galleryItem:hover  .moviePoster {
+    filter: blur(2px);
+}
+
+.galleryItem:hover > .hoverText{
     display: block;
 }
 
@@ -75,6 +75,10 @@ main {
     grid-area: nominations;
 }
 
+.search {
+    position: relative;
+}
+
 .searchbar {
     width: 100%;
     height: 50px;
@@ -83,6 +87,14 @@ main {
     border: 0;
     font-weight: 100;
     font-style: italic;
+}
+
+.searchIcon {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    right: 2%;
+    bottom: 20%;
 }
 
 .searchbar:focus {
@@ -110,4 +122,35 @@ main {
     color: white;
     font-weight: bolder;
     float: right;
+}
+
+.fadeIn-enter {
+    opacity: 0.01;
+    transform: translateY(-20px);
+    transition: all 0.1s ease-in;
+}
+
+.fadeIn-enter-done {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media only screen and (max-width: 1336px) {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .resultsGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .resultsGrid {
+        display: flex;
+        gap: 15px;
+    }
 }

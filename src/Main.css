@@ -91,9 +91,23 @@ main {
 }
 
 .nominationList {
-    display: inline-block;
+    display: flex;
+    row-gap: 15px;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 5px 5px;
 }
 
 .movieTitle {
     font-weight: bold;
+}
+
+.delete {
+    cursor: pointer;
+    background: darkred;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bolder;
+    float: right;
 }

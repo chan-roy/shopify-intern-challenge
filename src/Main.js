@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {ScaleLoader} from 'react-spinners'
 import './Main.css'
 
 
@@ -19,14 +20,37 @@ function Main() {
             setisFetching(true)
             fetch(`http://www.omdbapi.com/?s=${e.target.value}&apikey=21c815d1&type=movie`, {method: 'get'}).then(
                 (response) => response.json()
-                ).then(body => setResults(body.Search))
+                ).then(body => {
+                                setResults(body.Search)
+                                setisFetching(false)
+                            }
+                ).catch((e) => console.log(e))
         }
     }
 
     let saveNominations = (movie) => {
-        let newSelected = selected.concat(movie)
-        setSelected(newSelected)
-        window.localStorage.setItem('savedNoms', JSON.stringify(newSelected))
+        if (selected.length === 5) {
+            window.alert('Five movies have already been nominated.')
+        }
+        else {
+            if (selected.indexOf(movie) === -1) {
+                let newSelected = selected.concat(movie)
+                if (newSelected.length === 5) {
+                    window.alert('You have nominated five movies!')
+                }
+                setSelected(newSelected)
+                window.localStorage.setItem('savedNoms', JSON.stringify(newSelected))
+            }
+            else {
+                window.alert('Movie has already been nominated.')
+            }
+        }
+    }
+
+    let removeNomination = (index) => {
+        selected.splice(index, 1)
+        setSelected(selected)
+        window.localStorage.setItem('savedNoms', JSON.stringify(selected))
     }
 
     return (
@@ -40,6 +64,7 @@ function Main() {
             </div>
             <div className='results' style={{gridArea: 'results'}}>
                 <h1>Results</h1>
+                <ScaleLoader loading={isFetching}/>
                 <div className='resultsGrid'>
                     {results.map((result) => 
                         <div className='galleryItem'>
@@ -54,7 +79,7 @@ function Main() {
             <div className='nominations' style={{gridArea: 'nominations'}}>
                 <h1>Your Nominations</h1>
                 <div className='nominationList'>
-                    {selected.map((selection) => <div><span className='movieTitle'>{selection}</span><span>X</span></div>)}
+                    {selected.map((selection, index) => <div><span className='movieTitle'>{selection}</span><span className='delete' onClick={() => removeNomination(index)}>Remove</span></div>)}
                 </div>
             </div>
         </main>

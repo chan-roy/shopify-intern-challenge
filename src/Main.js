@@ -7,6 +7,13 @@ function Main() {
     let [results, setResults] = useState([])
     let [selected, setSelected] = useState([])
 
+    useEffect(() => {
+        const savedNoms = JSON.parse(window.localStorage.getItem('savedNoms'))
+        if (savedNoms) {
+            setSelected(savedNoms)
+        }
+    }, [])
+
     let getResults = (e) => {
         if (e.key === 'Enter') {
             setisFetching(true)
@@ -14,6 +21,12 @@ function Main() {
                 (response) => response.json()
                 ).then(body => setResults(body.Search))
         }
+    }
+
+    let saveNominations = (movie) => {
+        let newSelected = selected.concat(movie)
+        setSelected(newSelected)
+        window.localStorage.setItem('savedNoms', JSON.stringify(newSelected))
     }
 
     return (
@@ -28,13 +41,20 @@ function Main() {
             <div className='results' style={{gridArea: 'results'}}>
                 <h1>Results</h1>
                 <div className='resultsGrid'>
-                    {results.map((result) => <div className='movieDetail' onClick={() => selected.push(result.Title)}><img src={result.Poster} alt={result.Title}/><h3>{result.Title}</h3></div>)}
+                    {results.map((result) => 
+                        <div className='galleryItem'>
+                            <span className='hoverText'>Nominate</span>
+                            <div className='movieDetail' onClick={() => saveNominations(result.Title)}>
+                                <img className='moviePoster' src={result.Poster} alt={result.Title}/>
+                                <h3>{result.Title}</h3>
+                            </div>
+                        </div>)}
                 </div>
             </div>
             <div className='nominations' style={{gridArea: 'nominations'}}>
                 <h1>Your Nominations</h1>
                 <div className='nominationList'>
-                    {selected.map((selection) => <h1>{selection}</h1>)}
+                    {selected.map((selection) => <div><span className='movieTitle'>{selection}</span><span>X</span></div>)}
                 </div>
             </div>
         </main>

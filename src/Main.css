@@ -37,8 +37,32 @@ main {
     overflow-y: scroll;
 }
 
+.galleryItem {
+    position: relative;
+}
+
 .movieDetail {
+    transition: all 0.2s ease-out;
     cursor: pointer;
+}
+
+.hoverText {
+    display: none;
+    color: white;
+    font-size: 24px;
+    font-weight: bolder;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -60px -60px;
+}
+
+.movieDetail:hover {
+    filter: brightness(50%);
+}
+
+.hoverText + .movieDetail:hover{
+    display: block;
 }
 
 .resultsGrid > div {
@@ -57,10 +81,19 @@ main {
     font-size: 24px;
     border-radius: 25px;
     border: 0;
-    font-weight: bold;
+    font-weight: 100;
+    font-style: italic;
 }
 
 .searchbar:focus {
     outline: none;
     border: 1px solid black;
+}
+
+.nominationList {
+    display: inline-block;
+}
+
+.movieTitle {
+    font-weight: bold;
 }
